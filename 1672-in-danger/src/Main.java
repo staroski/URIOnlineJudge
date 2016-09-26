@@ -14,10 +14,9 @@ public class Main {
 	private static final PrintStream out = System.out;
 
 	public static void main(String[] args) throws IOException {
-		int persons = parseXYeZ(in.readLine());
-		while (persons > 0) {
+		int persons = 0;
+		while ((persons = parseXYeZ(in.readLine())) > 0) {
 			out.println(safePosition(persons));
-			persons = parseXYeZ(in.readLine());
 		}
 	}
 
