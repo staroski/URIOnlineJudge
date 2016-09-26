@@ -22,7 +22,7 @@ public class Main {
 		}
 	}
 
-	private static boolean isPrime(long n) {
+	private static boolean isPrime(int n) {
 		// números menores que 2 não são primos, pelo menos não para o URI Online Judge
 		// no mundo real, os números negativos são primos quando o seu oposto também é primo
 		if (n < 2) {
@@ -40,7 +40,7 @@ public class Main {
 		// basta testar se ele é divisível por algum número de 3 até a raíz quadrada de n
 		// se até chegar à raíz ele não foi divisível por nenhum número, ele é primo
 		// enquanto i * i for menor ou igual à n, significa que a iteração não alcançou a raíz de n
-		for (long i = 3; i * i <= n; i += 2) {
+		for (int i = 3; i * i <= n; i += 2) {
 			// se n dividido por i não tiver resto, significa que n é divisivel por i, então não é primo
 			if (n % i == 0) {
 				return false;
