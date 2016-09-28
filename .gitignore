@@ -1,5 +1,9 @@
-# eclipse files/folders
-bin
+# eclipse
+.metadata
 .settings
-.classpath
-.project
+bin
+RemoteSystemsTempFiles
+
+#DevC++
+*.exe
+*.o
