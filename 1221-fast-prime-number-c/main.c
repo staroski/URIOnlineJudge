@@ -23,15 +23,18 @@ int isPrime(int n) {
 	if (n < 2) {
 		return 0;
 	}
-	if (n == 2 || n == 3 || n == 5) {
+	if (n < 4) {
 		return 1;
 	}
-	if (n % 2 == 0 || n % 3 == 0 || n % 5 == 0) {
+	if (n % 2 == 0 || n % 3 == 0) {
 		return 0;
 	}
 	int i;
-	for (i = 7; i * i <= n; i += 2) {
+	for (i = 5; i * i <= n; i += 6) {
 		if (n % i == 0) {
+			return 0;
+		}
+		if (n % (i + 2) == 0) {
 			return 0;
 		}
 	}
