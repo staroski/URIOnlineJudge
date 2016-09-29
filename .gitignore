@@ -1,9 +1,10 @@
 # eclipse
 .metadata
 .settings
+.recommenders
 bin
 RemoteSystemsTempFiles
 
 #DevC++
-*.exe
-*.o
+**/*.exe
+**/*.o
