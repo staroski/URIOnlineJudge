@@ -6,45 +6,82 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * <a href="https://www.urionlinejudge.com.br/judge/en/problems/view/1726">1726Friends</a>
+ * <a href="https://www.urionlinejudge.com.br/judge/en/problems/view/1726">1726 Friends</a>
  * 
  * @author ricardo.staroski
  */
 public class Main {
 
-	private static final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	private static final PrintStream out = System.out;
-
 	public static void main(String[] args) throws IOException {
 		for (String line = null; (line = in.readLine()) != null && !line.isEmpty(); out.println(parseUnionOrDifference(new StringBuilder(line)))) {}
 	}
 
+	public static final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	public static final PrintStream out = System.out;
+
 	// calcula a diferença (-) de dois conjuntos
-	private static StringBuilder computeDifference(StringBuilder value1, StringBuilder value2) {
-		Set<Character> set1 = stringToSet(value1);
-		Set<Character> set2 = stringToSet(value2);
-		set1.removeAll(set2);
-		return setToString(set1);
+	public static StringBuilder computeDifference(StringBuilder set1, StringBuilder set2) {
+		int limit1 = set1.length() - 1;
+		int limit2 = set2.length() - 1;
+		SECOND: for (int i2 = 1; i2 < limit2; i2++) {
+			char symbol = set2.charAt(i2);
+			for (int i1 = 1; i1 < limit1; i1++) {
+				if (set1.charAt(i1) == symbol) {
+					set1.deleteCharAt(i1);
+					limit1--;
+					continue SECOND;
+				}
+			}
+		}
+		return set1;
 	}
 
 	// calcula a intersecção (*) de dois conjuntos
-	private static StringBuilder computeIntersection(StringBuilder value1, StringBuilder value2) {
-		Set<Character> set1 = stringToSet(value1);
-		Set<Character> set2 = stringToSet(value2);
-		set1.retainAll(set2);
-		return setToString(set1);
+	public static StringBuilder computeIntersection(StringBuilder set1, StringBuilder set2) {
+		int limit1 = set1.length();
+		int limit2 = set2.length();
+		FIRST: for (int i1 = 1; i1 < limit1; i1++) {
+			char symbol = set1.charAt(i1);
+			for (int i2 = 1; i2 < limit2; i2++) {
+				if (set2.charAt(i2) == symbol) {
+					continue FIRST;
+				}
+			}
+			set1.deleteCharAt(i1--);
+			limit1--;
+		}
+		return set1;
 	}
 
 	// calcula a união (+) de dois conjuntos
-	private static StringBuilder computeUnion(StringBuilder value1, StringBuilder value2) {
-		Set<Character> set1 = stringToSet(value1);
-		Set<Character> set2 = stringToSet(value2);
-		set1.addAll(set2);
-		return setToString(set1);
+	public static StringBuilder computeUnion(StringBuilder set1, StringBuilder set2) {
+		int limit1 = set1.length() - 1;
+		int limit2 = set2.length() - 1;
+		SECOND: for (int i2 = 1; i2 < limit2; i2++) {
+			char symbol = set2.charAt(i2);
+			for (int i1 = 1; i1 < limit1; i1++) {
+				if (set1.charAt(i1) == symbol) {
+					continue SECOND;
+				}
+			}
+			insert(symbol, set1, limit1++);
+		}
+		return set1;
+	}
+
+	// insere um elemento de forma ordenada
+	public static void insert(char symbol, StringBuilder set, int limit) {
+		for (int i = 1; i < limit; i++) {
+			if (symbol < set.charAt(i)) {
+				set.insert(i, symbol);
+				return;
+			}
+		}
+		set.insert(limit, symbol);
 	}
 
 	// faz o parse de um bloco
-	private static StringBuilder parseBlock(StringBuilder expression) {
+	public static StringBuilder parseBlock(StringBuilder expression) {
 		char symbol = expression.charAt(0);
 		if (symbol != '(') {
 			return new StringBuilder();
@@ -57,7 +94,7 @@ public class Main {
 	}
 
 	// faz o parse da operação '*'
-	private static StringBuilder parseIntersection(StringBuilder expression) {
+	public static StringBuilder parseIntersection(StringBuilder expression) {
 		StringBuilder value1 = parseSet(expression);
 		for (; expression.length() > 0;) {
 			char symbol = expression.charAt(0);
@@ -72,7 +109,7 @@ public class Main {
 	}
 
 	// faz o parse de um conjunto
-	private static StringBuilder parseSet(StringBuilder expression) {
+	public static StringBuilder parseSet(StringBuilder expression) {
 		StringBuilder value = parseBlock(expression);
 		StringBuilder result = new StringBuilder(value);
 		if (expression.length() > 0) {
@@ -90,7 +127,7 @@ public class Main {
 	}
 
 	// faz o parse das operações '+' e '-'
-	private static StringBuilder parseUnionOrDifference(StringBuilder expression) {
+	public static StringBuilder parseUnionOrDifference(StringBuilder expression) {
 		StringBuilder value1 = parseIntersection(expression);
 		for (; expression.length() > 0;) {
 			char symbol = expression.charAt(0);
@@ -109,7 +146,7 @@ public class Main {
 	}
 
 	// transforma um Set<Character> em uma String
-	private static StringBuilder setToString(Set<Character> set) {
+	public static StringBuilder setToString(Set<Character> set) {
 		StringBuilder text = new StringBuilder("{");
 		for (Character symbol : set) {
 			text.append(symbol);
@@ -119,7 +156,7 @@ public class Main {
 	}
 
 	// transforma uma String em um Set<Character>
-	private static Set<Character> stringToSet(StringBuilder value) {
+	public static Set<Character> stringToSet(StringBuilder value) {
 		TreeSet<Character> set = new TreeSet<>();
 		if ("{}".equals(value)) {
 			return set;
