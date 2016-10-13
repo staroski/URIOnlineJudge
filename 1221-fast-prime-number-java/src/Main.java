@@ -4,8 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 /**
- * <a href="https://www.urionlinejudge.com.br/judge/en/problems/view/1221">1221
- * Fast Prime Number</a>
+ * <a href="https://www.urionlinejudge.com.br/judge/en/problems/view/1221">1221 Fast Prime Number</a>
  * 
  * @author ricardo.staroski
  */

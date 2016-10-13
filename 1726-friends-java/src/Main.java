@@ -2,8 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * <a href="https://www.urionlinejudge.com.br/judge/en/problems/view/1726">1726 Friends</a>
@@ -13,11 +11,10 @@ import java.util.TreeSet;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		final PrintStream out = System.out;
 		for (String line = null; (line = in.readLine()) != null && !line.isEmpty(); out.println(parseUnionOrDifference(new StringBuilder(line)))) {}
 	}
-
-	public static final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	public static final PrintStream out = System.out;
 
 	// calcula a diferença (-) de dois conjuntos
 	public static StringBuilder computeDifference(StringBuilder set1, StringBuilder set2) {
@@ -143,27 +140,5 @@ public class Main {
 			}
 		}
 		return value1;
-	}
-
-	// transforma um Set<Character> em uma String
-	public static StringBuilder setToString(Set<Character> set) {
-		StringBuilder text = new StringBuilder("{");
-		for (Character symbol : set) {
-			text.append(symbol);
-		}
-		text.append('}');
-		return text;
-	}
-
-	// transforma uma String em um Set<Character>
-	public static Set<Character> stringToSet(StringBuilder value) {
-		TreeSet<Character> set = new TreeSet<>();
-		if ("{}".equals(value)) {
-			return set;
-		}
-		for (int i = 1, n = value.length() - 1; i < n; i++) {
-			set.add(value.charAt(i));
-		}
-		return set;
 	}
 }
