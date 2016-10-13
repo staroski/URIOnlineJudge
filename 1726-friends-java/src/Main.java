@@ -35,8 +35,8 @@ public class Main {
 
 	// calcula a intersecção (*) de dois conjuntos
 	public static StringBuilder computeIntersection(StringBuilder set1, StringBuilder set2) {
-		int limit1 = set1.length();
-		int limit2 = set2.length();
+		int limit1 = set1.length() - 1;
+		int limit2 = set2.length() - 1;
 		FIRST: for (int i1 = 1; i1 < limit1; i1++) {
 			char symbol = set1.charAt(i1);
 			for (int i2 = 1; i2 < limit2; i2++) {
