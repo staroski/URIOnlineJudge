@@ -6,7 +6,7 @@ bin
 RemoteSystemsTempFiles
 
 # eclipse Scala
-.cache-main
+**/.cache-main
 
 # DevC++
 **/*.exe
