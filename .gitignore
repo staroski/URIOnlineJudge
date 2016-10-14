@@ -1,10 +1,14 @@
-# eclipse
+# eclipse Java
 .metadata
 .settings
 .recommenders
 bin
 RemoteSystemsTempFiles
 
-#DevC++
+# eclipse Scala
+.cache-main
+
+# DevC++
 **/*.exe
 **/*.o
+
