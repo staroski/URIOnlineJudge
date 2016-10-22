@@ -29,18 +29,19 @@ char * parseSet(char * expression);
 // ponto de entrada do programa
 int main() { 
 	char * line = string_new();
-	fgets(line, sizeof(line), stdin);
-	while (line != NULL) {
+	scanf("%255[^\n]%*c", line);
+	while (strlen(line) > 0) {
 		printf("%s\n", parseUnionOrDifference(line));
-		fgets(line, sizeof(line), stdin);
+		scanf("%255[^\n]%*c", line);
 	}
+	free(line);
     return 0;
 }
 
 // cria uma String vazia
 char * string_new() {
 	char * buffer = malloc(sizeof(char) * 256);
-	memset(buffer, 0, sizeof(buffer));
+	buffer[0] = '\0';
     return buffer;
 }
 
